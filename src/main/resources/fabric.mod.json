@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.MomModel"
+			"com.example.MomModelMod"
 		],
 		"client": [
 			"com.example.ExampleModClient"
