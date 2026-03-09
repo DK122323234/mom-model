@@ -1,6 +1,8 @@
 package com.example.entity;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -17,6 +19,13 @@ public class MomEntity extends MobEntity implements GeoEntity {
     public MomEntity(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
     }
+    public static DefaultAttributeContainer.Builder createMobAttributes() {
+        return MobEntity.createMobAttributes().add(
+                EntityAttributes.GENERIC_MAX_HEALTH, 5)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0);
+    }
+
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, state -> {
@@ -25,6 +34,6 @@ public class MomEntity extends MobEntity implements GeoEntity {
     }
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
+        return cache;
     }
 }
