@@ -15,6 +15,6 @@ public class MomRender extends GeoEntityRenderer<MomEntity> {
 
     @Override
     public Identifier getTextureLocation(MomEntity animatable) {
-        return new Identifier(MomModelMod.MODID, "textures/entity/mom.png");
+        return new Identifier(MomModelMod.MODID, "textures/entity/mom2.png");
     }
 }

@@ -12,11 +12,11 @@ public class MomModel extends GeoModel<MomEntity> {
 
     @Override
     public Identifier getTextureResource(MomEntity momEntity) {
-        return new Identifier(MomModelMod.MODID, "textures/entity/mom.png");
+        return new Identifier(MomModelMod.MODID, "textures/entity/mom2.png");
     }
 
     @Override
     public Identifier getAnimationResource(MomEntity momEntity) {
-        return new Identifier(MomModelMod.MODID, "animations/mom.animation");
+        return new Identifier(MomModelMod.MODID, "animations/mom.animation.json");
     }
 }
