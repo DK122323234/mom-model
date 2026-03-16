@@ -32,6 +32,7 @@ public class MomGoal extends Goal {
     @Override
     public void start() {
         LOGGER.info("Мама рада");
+        mom.getJumpControl().setActive();
     }
 
     private static boolean radiusCheck(double radius, World world, Item targetItem, PlayerEntity player) {
