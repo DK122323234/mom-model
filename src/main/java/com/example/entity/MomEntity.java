@@ -19,9 +19,10 @@ public class MomEntity extends MobEntity implements GeoEntity {
     public MomEntity(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
     }
+
     public static DefaultAttributeContainer.Builder createMobAttributes() {
         return MobEntity.createMobAttributes().add(
-                EntityAttributes.GENERIC_MAX_HEALTH, 5)
+                        EntityAttributes.GENERIC_MAX_HEALTH, 5)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0);
     }
@@ -30,10 +31,18 @@ public class MomEntity extends MobEntity implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, state -> {
             return PlayState.CONTINUE;
-        }));;
+        }));
+        ;
     }
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    protected void initGoals() {
+        this.goalSelector.add(1, new MomGoal(this));
+
     }
 }

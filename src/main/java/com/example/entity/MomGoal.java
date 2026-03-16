@@ -22,7 +22,11 @@ public class MomGoal extends Goal {
     @Override
     public boolean canStart() {
         World world  = this.mom.getWorld();
-        PlayerEntity player = world.getPlayerByUuid(this.mom.getUuid());
+        PlayerEntity player = world.getClosestPlayer(this.mom, 10.0);
+
+        if (player == null) {
+            return false;
+        }
         return radiusCheck(5, world, Items.DIAMOND, player);
     }
     @Override
