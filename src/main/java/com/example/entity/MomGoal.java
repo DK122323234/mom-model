@@ -31,7 +31,6 @@ public class MomGoal extends Goal {
     }
     @Override
     public void start() {
-        LOGGER.info("Мама рада");
         mom.getJumpControl().setActive();
     }
 
