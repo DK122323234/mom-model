@@ -60,7 +60,12 @@ public class MomEntity extends MobEntity implements GeoEntity {
     public void travel(net.minecraft.util.math.Vec3d movementInput) {
         if (this.isAlive()) {
             if (this.hasPassengers() && this.getControllingPassenger() instanceof net.minecraft.entity.player.PlayerEntity player) {
-
+                this.setYaw(player.getYaw());
+                this.prevYaw = this.getYaw();
+                this.setPitch(player.getPitch() * 0.5F);
+                this.setRotation(this.getYaw(), this.getPitch());
+                this.bodyYaw = this.getYaw();
+                this.headYaw = this.bodyYaw;
                 float sideways = player.sidewaysSpeed;
                 float forward = player.forwardSpeed;
 
