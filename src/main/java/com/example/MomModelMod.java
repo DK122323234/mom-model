@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.entity.RegisterEntity;
+import com.example.sound.RegisterSound;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -14,5 +15,6 @@ public class MomModelMod implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Hello Fabric world!");
         RegisterEntity.register();
+        RegisterSound.register();
     }
 }
