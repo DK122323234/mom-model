@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.example.sound.RegisterSound;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +14,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -151,6 +154,16 @@ public class MomEntity extends TameableEntity implements GeoEntity {
         }
     }
 
-
-
+    @Override
+    public void tick() {
+        super.tick();
+        if (!this.getWorld().isClient && this.age % 100 == 0) {
+            this.getWorld().playSound(null,
+                    this.getBlockPos(),
+                    RegisterSound.MOM_SOUND,
+                    SoundCategory.NEUTRAL,
+                    1.0f,
+                    1.0f);
+        }
+    }
 }
