@@ -13,6 +13,7 @@ import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -164,6 +165,21 @@ public class MomEntity extends TameableEntity implements GeoEntity {
                     SoundCategory.NEUTRAL,
                     1.0f,
                     1.0f);
+        }
+    }
+    protected void jump() {
+        super.jump();
+
+        if (this.getWorld().isClient()) {
+            for (int i = 0; i < 8; i++) {
+                this.getWorld().addParticle(
+                        ParticleTypes.FLAME,
+                        this.getX() + (this.random.nextDouble() - 0.5) * 0.5, // Немного разброса по X
+                        this.getY(),                                         // У ног
+                        this.getZ() + (this.random.nextDouble() - 0.5) * 0.5, // Немного разброса по Z
+                        0.0, 0.1, 0.0                                        // Скорость вверх
+                );
+            }
         }
     }
 }
