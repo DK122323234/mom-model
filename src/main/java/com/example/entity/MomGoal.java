@@ -31,14 +31,21 @@ public class MomGoal extends Goal {
     }
     @Override
     public void start() {
-        mom.getJumpControl().setActive();
+        LOGGER.info("Мама рада");
+        mom.jump();
     }
 
     private static boolean radiusCheck(double radius, World world, Item targetItem, PlayerEntity player) {
+        // Создаем область поиска вокруг игрока
         Box searchBox = player.getBoundingBox().expand(radius);
-        List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class,searchBox,(ItemEntity) -> {
-            return ItemEntity.getStack().isOf(targetItem);
+
+        // Ищем сущности предметов в этой области
+        List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class, searchBox, (entity) -> {
+            // Проверяем стак конкретной найденной сущности
+            return entity.getStack().isOf(targetItem);
         });
+
+        // Возвращаем true, если список не пуст
         return !items.isEmpty();
     }
 }

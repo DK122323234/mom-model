@@ -66,12 +66,15 @@ public class MomEntity extends TameableEntity implements GeoEntity {
     }
     @Override
     protected void initGoals() {
+
+
         this.goalSelector.add(0, new SwimGoal(this));
 
         this.goalSelector.add(1, new FollowOwnerGoal (this, 1.2D, 1, 1, false));
 
         this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(3, new LookAroundGoal(this));
+        this.goalSelector.add(4, new MomGoal(this));
     }
     @Override
 
@@ -167,19 +170,27 @@ public class MomEntity extends TameableEntity implements GeoEntity {
                     1.0f);
         }
     }
+@Override
     protected void jump() {
         super.jump();
+      this.getWorld().sendEntityStatus(this, (byte) 61);
+    }
 
-        if (this.getWorld().isClient()) {
-            for (int i = 0; i < 8; i++) {
+    @Override
+    public void handleStatus(byte status) {
+        if (status == 61) {
+            for (int i = 0; i < 15; i++) {
+                double x = this.getX() + (this.random.nextDouble() - 0.5) * 0.6;
+                double z = this.getZ() + (this.random.nextDouble() - 0.5) * 0.6;
+
                 this.getWorld().addParticle(
                         ParticleTypes.FLAME,
-                        this.getX() + (this.random.nextDouble() - 0.5) * 0.5, // Немного разброса по X
-                        this.getY(),                                         // У ног
-                        this.getZ() + (this.random.nextDouble() - 0.5) * 0.5, // Немного разброса по Z
-                        0.0, 0.1, 0.0                                        // Скорость вверх
+                        x, this.getY(), z,
+                        0.0, 0.1, 0.0
                 );
             }
+        } else {
+            super.handleStatus(status);
         }
     }
 }
